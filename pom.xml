@@ -12,13 +12,13 @@
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <steel.release>https://github.com/Steel-Foundation/SteelMC/releases/download/v0.16.0%2Bmc26.3</steel.release>
+    <steel.release>https://github.com/Steel-Foundation/SteelMC/releases/latest/download</steel.release>
   </properties>
 
   <build>
     <finalName>steel</finalName>
     <plugins>
-      <!-- fetch every release binary into the jar, verified by sha256 -->
+      <!-- fetch every binary of the latest release into the jar (unverified: no fixed sha256; skipCache so a new release is picked up) -->
       <plugin>
         <groupId>io.github.download-maven-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>
@@ -30,7 +30,8 @@
             <goals><goal>wget</goal></goals>
             <configuration>
               <url>${steel.release}/steel-linux</url>
-              <sha256>9c9c0a7f1123a9bf9f216a534394d3f0b224a56175785a62ea51cf439daa3072</sha256>
+              <skipCache>true</skipCache>
+              <overwrite>true</overwrite>
               <outputDirectory>${project.build.outputDirectory}/bin</outputDirectory>
             </configuration>
           </execution>
@@ -40,7 +41,8 @@
             <goals><goal>wget</goal></goals>
             <configuration>
               <url>${steel.release}/steel-linux-musl</url>
-              <sha256>7b86cb7cf21db37457d354b737c156e3b55a5671a665a31effbeb44115462c60</sha256>
+              <skipCache>true</skipCache>
+              <overwrite>true</overwrite>
               <outputDirectory>${project.build.outputDirectory}/bin</outputDirectory>
             </configuration>
           </execution>
@@ -50,7 +52,8 @@
             <goals><goal>wget</goal></goals>
             <configuration>
               <url>${steel.release}/steel-macos</url>
-              <sha256>9e260d1407e4bf56bdbaab2bef3256eccd0e5325ddb33a935e57b8f827906259</sha256>
+              <skipCache>true</skipCache>
+              <overwrite>true</overwrite>
               <outputDirectory>${project.build.outputDirectory}/bin</outputDirectory>
             </configuration>
           </execution>
@@ -60,7 +63,8 @@
             <goals><goal>wget</goal></goals>
             <configuration>
               <url>${steel.release}/steel-windows.exe</url>
-              <sha256>bd0314a86cc95b7a0b2e700127ce227a3b444c7c788d57d35ae6c3fa939cecd5</sha256>
+              <skipCache>true</skipCache>
+              <overwrite>true</overwrite>
               <outputDirectory>${project.build.outputDirectory}/bin</outputDirectory>
             </configuration>
           </execution>
