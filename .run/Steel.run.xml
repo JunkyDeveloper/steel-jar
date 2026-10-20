@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Steel" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="steel.Launcher" />
+    <module name="steel-jar" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Steel build" run_configuration_type="MavenRunConfiguration" />
+    </method>
+  </configuration>
+</component>
