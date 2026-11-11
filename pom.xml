@@ -12,13 +12,13 @@
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <steel.release>https://github.com/Steel-Foundation/SteelMC/releases/latest/download</steel.release>
+    <steel.release>https://github.com/Steel-Foundation/SteelMC/releases/download/v${project.version}</steel.release>
   </properties>
 
   <build>
     <finalName>steel</finalName>
     <plugins>
-      <!-- fetch every binary of the latest release into the jar (unverified: no fixed sha256; skipCache so a new release is picked up) -->
+      <!-- fetch every binary of the SteelMC release matching project.version into the jar (unverified: no fixed sha256; skipCache so a new release is picked up) -->
       <plugin>
         <groupId>io.github.download-maven-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>

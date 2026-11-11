@@ -1,0 +1,50 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths: [pom.xml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Read version
+        id: v
+        run: echo "tag=v$(mvn -q help:evaluate -Dexpression=project.version -DforceStdout)" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if release exists
+        id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.v.outputs.tag }}" >/dev/null 2>&1; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build
+        if: steps.exists.outputs.skip != 'true'
+        run: mvn -B package
+
+      - name: Release
+        if: steps.exists.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${{ steps.v.outputs.tag }}"
+          gh release create "$tag" target/steel.jar \
+            --target "$GITHUB_SHA" \
+            --title "$tag" \
+            --notes "Bundles [SteelMC $tag](https://github.com/Steel-Foundation/SteelMC/releases/tag/$tag)."
