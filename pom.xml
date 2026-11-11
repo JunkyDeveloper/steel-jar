@@ -6,7 +6,7 @@
 
   <groupId>steel</groupId>
   <artifactId>steel-jar</artifactId>
-  <version>0.16.0+mc26.3</version>
+  <version>0.17.0+mc26.3</version>
   <packaging>jar</packaging>
 
   <properties>
